@@ -53,9 +53,9 @@
   
   <!-- Hero Image Background -->
   <div id="bg-div" class="w-full h-screen flex items-center justify-center">
-    <h1 class="text-4xl absolute -rotate-90 left-0">Making a Clay* Printer</h1>
-    <h1 class="text-2xl absolute -rotate-90 left-0">(!!!under construction!!!)</h1>
-    <img src="images/slideshow.webp" class="w-full md:w-1/2" alt="Background" />
+    <h1 class="text-6xl absolute md:text-4xl md:-rotate-90 md:left-0 ">Making a Clay* Printer</h1>
+    <h1 class="text-2xl absolute top-0 md:-rotate-90 md:left-0 md:top-auto">(!!!under construction!!!)</h1>
+    <img src="images/slideshow.webp" class="w-7/8 md:w-1/2" alt="Background" />
   </div>
 
   <!-- Floating Texts (Navigation Triggers) -->
@@ -79,7 +79,7 @@
     <div class="grid justify-center grid-cols-1 md:grid-cols-3 gap-8 mt-4">
       <div><h3 class="text-3xl font-bold">Overview</h3>
         <a href="old_index.html">[Link to page with diagrams]</a><br>
-        <a href="/">[Link to page with downloadable files]</a>
+        <a href="">[Link to page with downloadable files]</a>
       </div>
       <div><h3 class="text-3xl font-bold">Building the Printer</h3><p>[WIP]<br>Disassembly<br>Design and Modifications<br>Printing the parts<br>Assembly</p>
       </div>
@@ -131,13 +131,8 @@
         element.style.left = imgRect.left + left + 'px';
         element.style.top = imgRect.top + top + 'px';
       }
-      // Wait for image to load for correct sizing
-      //if (img.complete) {
-        positionFloatingText();
-      //} else {
-      //  img.onload = positionFloatingText;
-      //}
-      // Optional: reposition on window resize
+      // Initial positioning
+      positionFloatingText();
       window.addEventListener('resize', positionFloatingText);
     });
   </script>
