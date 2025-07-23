@@ -1,91 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Making a Clay Printer</title>
-    <style>
-        @font-face {
-            font-family: 'Ugly Dave';
-            src: url('/making-a-clay-printer/fonts/UglyDaveRegular.woff2') format('woff2'),
-                url('/making-a-clay-printer/fonts/UglyDaveRegular.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-            font-display: block;
-        }
-        @font-face {
-            font-family: 'Ugly Dave';
-            src: url('/fonts/UglyDaveRegular.woff2') format('woff2'),
-                url('/fonts/UglyDaveRegular.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-            font-display: block;
-        }
-        body { 
-            margin: 20px; 
-            font-family: 'Ugly Dave', sans-serif;}
-        .menu { margin-bottom: 10px; }
-        .menu button {
-            margin-right: 10px;
-            padding: 4px 8px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-        .image-container img {
-            width: 90%;
-            height: auto;
-            display: block;
-            margin: 10px auto;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
-        
-    </style>
-<!--    <link rel="stylesheet" href="load_font.css">-->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Making a Clay* Printer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @font-face {
+        font-family: 'Ugly Dave';
+        src: url('/fonts/UglyDaveRegular.woff2') format('woff2'),
+            url('/fonts/UglyDaveRegular.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    body { 
+      margin: 20px; 
+      background-color: rgb(128, 183, 232);
+    }
+    h1, h2, h3 {
+      font-family: 'Ugly Dave', sans-serif;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: rgb(255, 255, 255);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .floating-text {
+      position: absolute;
+      font-family: 'Ugly Dave', sans-serif;
+      white-space: nowrap;
+      cursor: pointer;
+      animation: float 6s ease-in-out infinite;
+      color: rgb(255, 255, 255);
+      transition: transform 0.3s ease;
+    }
+    .floating-text:hover {
+      color: #322c6d; /* Change color on hover */
+      /*text-decoration: dotted underline;*/
+      transform: scale(1.1);
+      transition: transform 0.2s ease;
+    }
+
+  </style>
 </head>
-<body>    
-    <div class="menu">
-        <button onclick="showImage('design')">Home</button>
-        <button onclick="showImage('subsystem')">Subsystems</button>
-        <button onclick="showImage('parts')">Parts</button>
-        <button onclick="showImage('extruder')">Extruder Head</button>
-    </div>
-    <h1>Hello world</h1>
-    <h2>Hello Moi</h2>
-    <h3>adfjkla;dfsj</h3>
-    <div class="image-container" id="imageContainer">
-        <!-- Image will appear here -->
-    </div>
-    
-    <p>hi</p>
+<body class="relative overflow-x-hidden">
+  
+  <!-- Hero Image Background -->
+  <div id="bg-div" class="w-full h-screen flex items-center justify-center">
+    <h1 class="text-4xl font-bold absolute -rotate-90 left-0">Making a Clay* Printer</h1>
+    <img src="/images/slideshow.webp" class="w-full md:w-1/2" alt="Background" />
+  </div>
 
-    <script>
-        const images = {
-            design: {
-                src: 'images/making-a-clay-printer-01.jpg',
-                alt: 'Clay printer design diagram'
-            },
-            subsystem: {
-                src: 'images/subsystems-01.jpg',
-                alt: 'Clay printer subsystems diagram'
-            },
-            parts: {
-                src: 'images/parts-01.jpg',
-                alt: 'Clay printer parts diagram'
-            },
-            extruder: {
-                src: 'images/extruder-head-assembly-01.jpg',
-                alt: 'Clay printer extruder head assembly'
-            }
-        };
+  <!-- Floating Texts (Navigation Triggers) -->
+  <div id="about-btn" class="absolute floating-text text-8xl" onclick="scrollToSection('about')">About</div>
+  <div id="process-btn" class="absolute floating-text text-8xl" onclick="scrollToSection('process')">Process</div>
+  <div id="feed-btn" class="absolute floating-text text-8xl" onclick="scrollToSection('feed')">Feed</div>
+  
+  <!-- Content Sections -->
+  <div id="about" class="min-h-screen bg-white p-10 relative">
+    <a href="#about"><h2 class="text-3xl font-bold">ABOUT</h2></a>
+    <p>Date: 2016.07.18<br>Venue: Shibuya O-NEST<br>Artists: Special Favorite Music, Sugar's Campaign, 他</p>
+  </div>
 
-        function showImage(key) {
-            const container = document.getElementById('imageContainer');
-            const imgData = images[key];
-            container.innerHTML = `<img src="${imgData.src}" alt="${imgData.alt}">`;
+  <div id="process" class="min-h-screen bg-gray-100 p-10">
+    <h2 class="text-3xl font-bold">PROCESS</h2>
+    <p>Date: 2016.08.07<br>Venue: Osaka Noon<br>Artists: Special Favorite Music (Oneman Show)</p>
+  </div>
+
+  <div id="feed" class="min-h-screen bg-white p-10">
+    <h2 class="text-3xl font-bold">FEED</h2>
+    <p>Open: 18:00 / Start: 18:30 in Tokyo<br>Open: 18:30 / Start: 19:00 in Osaka<br>Tickets: Adv 2500/2000 yen</p>
+  </div>
+
+  <!-- Back to Top Button -->
+  <div onclick="scrollToTop()" 
+    class="fixed bottom-8 right-8 bg-orange-500 text-white p-4 rounded-full cursor-pointer hover:bg-orange-600 shadow-lg hidden"
+    id="backToTop">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+    </svg>
+  </div>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const img = document.querySelector('#bg-div');
+      const floating = document.getElementsByClassName('floating-text');
+
+      // Position the floating text randomly within the image
+      function positionFloatingText() {
+        const imgRect = img.getBoundingClientRect();
+        for (let i = 0; i < floating.length; i++) {
+          positionSingleFloatingText(floating[i], imgRect);
         }
+      }
 
-        // Show the first image by default
-        showImage('design');
-    </script>
+      function positionSingleFloatingText(element, imgRect) {
+        const floatRect = element.getBoundingClientRect();
+        const edgePadding = 20; // Padding from edges
+        // Calculate max left/top so text stays within image
+        const maxLeft = imgRect.width - floatRect.width - edgePadding;
+        const maxTop = imgRect.height - floatRect.height - edgePadding;
+        const left = Math.random() * maxLeft;
+        const top = Math.random() * maxTop;
+        element.style.left = imgRect.left + left + 'px';
+        element.style.top = imgRect.top + top + 'px';
+      }
+      // Wait for image to load for correct sizing
+      //if (img.complete) {
+        positionFloatingText();
+      //} else {
+      //  img.onload = positionFloatingText;
+      //}
+      // Optional: reposition on window resize
+      window.addEventListener('resize', positionFloatingText);
+    });
+  </script>
+
+  <!-- Smooth Scroll Script -->
+  <script>
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => window.location.hash = id, 1000);
+    }
+
+    function scrollToTop() {
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    // Update URL fragment on scroll
+    window.addEventListener('scroll', () => {
+      const sections = ['about', 'process', 'feed'];
+      for (let id of sections) {
+        const element = document.getElementById(id);
+        const rect = element.getBoundingClientRect();
+        if (rect.top >= 0 && rect.top <= window.innerHeight / 2) {
+          history.replaceState(null, null, `#${id}`);
+          break;
+        } 
+      }
+      if(document.documentElement.scrollTop == 0) {
+        history.replaceState(null, null, '#');
+      }
+      if(document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById('backToTop').classList.remove('hidden');
+      } else {
+        document.getElementById('backToTop').classList.add('hidden');
+      }
+    });
+  </script>
+
 </body>
 </html>
