@@ -16,6 +16,8 @@
     }
 
     body { 
+      font-family:'Courier New', Courier, monospace;
+      color: #454070;
       margin: 20px; 
       background-color: rgb(128, 183, 232);
     }
@@ -31,7 +33,7 @@
 
     .floating-text {
       position: absolute;
-      font-family: 'Ugly Dave', sans-serif;
+      font-family: 'Ugly Dave', sans-serif; 
       white-space: nowrap;
       cursor: pointer;
       animation: float 6s ease-in-out infinite;
@@ -39,7 +41,7 @@
       transition: transform 0.3s ease;
     }
     .floating-text:hover {
-      color: #322c6d; /* Change color on hover */
+      color: #454070; /* Change color on hover */
       /*text-decoration: dotted underline;*/
       transform: scale(1.1);
       transition: transform 0.2s ease;
@@ -51,7 +53,8 @@
   
   <!-- Hero Image Background -->
   <div id="bg-div" class="w-full h-screen flex items-center justify-center">
-    <h1 class="text-4xl font-bold absolute -rotate-90 left-0">Making a Clay* Printer</h1>
+    <h1 class="text-4xl absolute -rotate-90 left-0">Making a Clay* Printer</h1>
+    <h1 class="text-2xl absolute -rotate-90 left-0">(!!!under construction!!!)</h1>
     <img src="images/slideshow.webp" class="w-full md:w-1/2" alt="Background" />
   </div>
 
@@ -63,17 +66,36 @@
   <!-- Content Sections -->
   <div id="about" class="min-h-screen bg-white p-10 relative">
     <a href="#about"><h2 class="text-3xl font-bold">ABOUT</h2></a>
-    <p>Date: 2016.07.18<br>Venue: Shibuya O-NEST<br>Artists: Special Favorite Music, Sugar's Campaign, 他</p>
+    <div class="grid justify-center grid-cols-1 md:grid-cols-2 gap-8 mt-4">
+      <div><h3 class="text-3xl font-bold">The project</h3><p>[WIP] It aims to facilitate an exploration in different 3D printing materials by <br>1) the disassembly of an existing printer main frame, <br>2) modifying its different components to facilitate the chosen material’s smooth printing, and <br>3) calibrating the formula used for the printing clay.</p>
+      </div>
+      <div><h3 class="text-3xl font-bold">The makers</h3><p>[WIP] This 3D Clay Printer is a project of the Batch 5 Fablab Mentees of the UP CFA FabLab Mentorship Program. Core team includes the following Batch 5 mentees: Eliza, Jayvee, Kissa, Moira, Zeeb,<br>Resident fablabbers: Ais, Jhoanna, Koji and <br><s>Elders</s> Mentors: Tito, Minnie, Robby</p>
+      </div>
+    </div>
   </div>
 
   <div id="process" class="min-h-screen bg-gray-100 p-10">
     <h2 class="text-3xl font-bold">PROCESS</h2>
-    <p>Date: 2016.08.07<br>Venue: Osaka Noon<br>Artists: Special Favorite Music (Oneman Show)</p>
+    <div class="grid justify-center grid-cols-1 md:grid-cols-3 gap-8 mt-4">
+      <div><h3 class="text-3xl font-bold">Overview</h3>
+        <a href="old_index.html">[Link to page with diagrams]</a><br>
+        <a href="/">[Link to page with downloadable files]</a>
+      </div>
+      <div><h3 class="text-3xl font-bold">Building the Printer</h3><p>[WIP]<br>Disassembly<br>Design and Modifications<br>Printing the parts<br>Assembly</p>
+      </div>
+      <div><h3 class="text-3xl font-bold">Using the Printer</h3><p>[WIP]Link to guide</p>
+      </div>
+    </div>
   </div>
 
   <div id="feed" class="min-h-screen bg-white p-10">
     <h2 class="text-3xl font-bold">FEED</h2>
-    <p>Open: 18:00 / Start: 18:30 in Tokyo<br>Open: 18:30 / Start: 19:00 in Osaka<br>Tickets: Adv 2500/2000 yen</p>
+    <div class="grid justify-center grid-cols-1 md:grid-cols-2 gap-8 mt-4">
+      <div><h3 class="text-3xl font-bold">Logs</h3><p>[WIP] </p>
+      </div>
+      <div><h3 class="text-3xl font-bold">Release Notes</h3><p></p>
+      </div>
+    </div>
   </div>
 
   <!-- Back to Top Button -->
