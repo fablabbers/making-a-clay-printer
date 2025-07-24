@@ -14,7 +14,6 @@
         font-style: normal;
         font-display: swap;
     }
-
     body { 
       font-family:'Courier New', Courier, monospace;
       color: #454070;
@@ -24,44 +23,49 @@
     h1, h2, h3 {
       font-family: 'Ugly Dave', sans-serif;
     }
-    h1 {
+    #bg-div {
+      color: white;
+    }
+    /*h1 {
       font-size: 2.5rem;
       color: rgb(255, 255, 255);
       text-align: center;
       margin-bottom: 20px;
-    }
-
+    }*/
     .floating-text {
       position: absolute;
       font-family: 'Ugly Dave', sans-serif; 
       white-space: nowrap;
       cursor: pointer;
+      font-style: italic;
       animation: float 6s ease-in-out infinite;
       color: rgb(255, 255, 255);
       transition: transform 0.3s ease;
     }
+    /* Hover effect for floating text */
     .floating-text:hover {
-      color: #454070; /* Change color on hover */
-      /*text-decoration: dotted underline;*/
+      color: #454070; 
       transform: scale(1.1);
       transition: transform 0.2s ease;
     }
-
   </style>
 </head>
 <body class="relative overflow-x-hidden">
   
   <!-- Hero Image Background -->
   <div id="bg-div" class="w-full h-screen flex items-center justify-center">
-    <h1 class="text-6xl absolute md:text-4xl md:-rotate-90 md:left-0 ">Making a Clay* Printer</h1>
-    <h1 class="text-2xl absolute top-0 md:-rotate-90 md:left-0 md:top-auto">(!!!under construction!!!)</h1>
-    <img src="images/slideshow.webp" class="w-7/8 md:w-1/2" alt="Background" />
+    <div class="items-center flex">
+      <h1 class="text-6xl absolute md:-rotate-90 md:left-0 md:text-4xl ">Making a Clay* Printer</h1>
+      <h1 class="text-2xl absolute top-0 md:-rotate-90 md:left-0 md:top-auto">(!!!under construction!!!)</h1>
+      
+    </div>
+    <img src="images/slideshow.webp" class="w-5/6 md:w-1/2" alt="Background" />
   </div>
 
   <!-- Floating Texts (Navigation Triggers) -->
-  <div id="about-btn" class="absolute floating-text text-8xl" onclick="scrollToSection('about')">About</div>
-  <div id="process-btn" class="absolute floating-text text-8xl" onclick="scrollToSection('process')">Process</div>
-  <div id="feed-btn" class="absolute floating-text text-8xl" onclick="scrollToSection('feed')">Feed</div>
+  <div id="about-btn" class="absolute floating-text text-4xl md:text-8xl" onclick="scrollToSection('about')">About</div>
+  <div id="process-btn" class="absolute floating-text text-4xl md:text-8xl" onclick="scrollToSection('process')">Process</div>
+  <div id="feed-btn" class="absolute floating-text text-4xl md:text-8xl" onclick="scrollToSection('feed')">Feed</div>
   
   <!-- Content Sections -->
   <div id="about" class="min-h-screen bg-white p-10 relative">
@@ -108,37 +112,56 @@
   </div>
 
 <script>
+    // Position floating text randomly within the top section
     window.addEventListener('DOMContentLoaded', () => {
-      const img = document.querySelector('#bg-div');
+      const heroSection = document.querySelector('#bg-div');
       const floating = document.getElementsByClassName('floating-text');
 
-      // Position the floating text randomly within the image
       function positionFloatingText() {
-        const imgRect = img.getBoundingClientRect();
+        const boundingRect = heroSection.getBoundingClientRect();
         for (let i = 0; i < floating.length; i++) {
-          positionSingleFloatingText(floating[i], imgRect);
+          positionSingleFloatingText(floating[i], boundingRect);
         }
       }
 
-      function positionSingleFloatingText(element, imgRect) {
+      function positionSingleFloatingText(element, boundingRect) {
         const floatRect = element.getBoundingClientRect();
         const edgePadding = 20; // Padding from edges
+        const isMobile = window.innerWidth < 768; // md breakpoint
+        
         // Calculate max left/top so text stays within image
-        const maxLeft = imgRect.width - floatRect.width - edgePadding;
-        const maxTop = imgRect.height - floatRect.height - edgePadding;
-        const left = Math.random() * maxLeft;
-        const top = Math.random() * maxTop;
-        element.style.left = imgRect.left + left + 'px';
-        element.style.top = imgRect.top + top + 'px';
+        const maxLeft = boundingRect.width - floatRect.width - edgePadding;
+        const maxTop = boundingRect.height - floatRect.height - edgePadding;
+        
+        let left = Math.random() * maxLeft;
+        let top = Math.random() * maxTop;
+
+        // On mobile, ensure text is outside the central image area
+        if (isMobile) {
+          const imageEl = document.querySelector('#bg-div img');
+          const imageRect = imageEl.getBoundingClientRect();
+          
+          // Keep trying new positions until we find one outside the image
+          while (left > (imageRect.left - boundingRect.left) && 
+             left < (imageRect.right - boundingRect.left) && 
+             top > (imageRect.top - boundingRect.top) && 
+             top < (imageRect.bottom - boundingRect.top)) {
+        left = Math.random() * maxLeft;
+        top = Math.random() * maxTop;
+          }
+        }
+
+        element.style.left = boundingRect.left + left + 'px';
+        element.style.top = boundingRect.top + top + 'px';
       }
       // Initial positioning
       positionFloatingText();
+
+      // Reposition on resize
       window.addEventListener('resize', positionFloatingText);
     });
-  </script>
 
-  <!-- Smooth Scroll Script -->
-  <script>
+    // Smooth scrolling to sections
     function scrollToSection(id) {
       document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
       setTimeout(() => window.location.hash = id, 1000);
