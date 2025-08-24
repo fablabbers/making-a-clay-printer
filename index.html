@@ -113,26 +113,28 @@
     <h2 class="text-3xl font-bold">SHOWCASE 💪  </h2>
         <div class="grid grid-cols-4 gap-4 mt-4 justify-items-center">
         <script>
-          fetch('images/showcase/')
-            .then(response => response.text())
-            .then(text => {
-              const parser = new DOMParser();
-              const doc = parser.parseFromString(text, 'text/html');
-              const links = Array.from(doc.querySelectorAll('a'))
-          .filter(a => a.href.match(/\.(jpg|jpeg|png|webp)$/i))
-          .map(a => a.href);
-          
-              const showcase = document.querySelector('#showcase .grid');
-              links.forEach(link => {
-          const img = document.createElement('img');
-          img.src = link;
-          img.alt = 'Showcase image';
-          img.className = 'h-60 w-full object-cover cursor-pointer';
-          img.onclick = () => showFullImage(img.src);
-          showcase.appendChild(img);
-              });
-            })
-            .catch(console.error);
+          const imageFiles = [
+            'images/showcase/1.jpg',
+            'images/showcase/2.jpg',
+            'images/showcase/3.jpg',
+            'images/showcase/4.jpg',
+            'images/showcase/5.jpg',
+            'images/showcase/6.jpg',
+            'images/showcase/7.jpg',
+            'images/showcase/8.jpg',
+            'images/showcase/brochure_1.png',
+            'images/showcase/brochure_2.png'
+          ];
+
+          const showcase = document.querySelector('#showcase .grid');
+          imageFiles.forEach(src => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = 'Showcase image';
+            img.className = 'h-60 w-full object-cover cursor-pointer';
+            img.onclick = () => showFullImage(img.src);
+            showcase.appendChild(img);
+          });
         </script>
         </div>
 
@@ -140,7 +142,7 @@
           <img id="fullImage" src="" alt="Full size image" class="max-h-[90vh] max-w-[90vw] object-contain">
         </div>
 
-        <script>s
+        <script>
         function showFullImage(src) {
           document.getElementById('fullImage').src = src;
           document.getElementById('fullImageModal').classList.remove('hidden');
@@ -235,7 +237,7 @@
 
     // Update URL fragment on scroll
     window.addEventListener('scroll', () => {
-      const sections = ['about', 'process', 'feed'];
+      const sections = ['about', 'process', 'showcase'];
       for (let id of sections) {
         const element = document.getElementById(id);
         const rect = element.getBoundingClientRect();
