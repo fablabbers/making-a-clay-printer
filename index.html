@@ -102,23 +102,60 @@
     </div>
   </div>
 
-  <!--<div id="feed" class="min-h-screen bg-white p-10">
-    <h2 class="text-3xl font-bold">FEED</h2>
-    <div class="grid justify-center grid-cols-1 md:grid-cols-2 gap-8 mt-4">
-      <div><h3 class="text-3xl font-bold">Logs</h3><p>[WIP] </p>
-      </div>
-      <div><h3 class="text-3xl font-bold">Release Notes</h3><p></p>
-      </div>
-    </div>
-  </div>-->
-
   <div id="showcase" class="min-h-screen bg-white p-10">
-    <h2 class="text-3xl font-bold">SHOWCASE</h2>
-    <div class="grid justify-center grid-cols-1 md:grid-cols-2 gap-8 mt-4">
-      <div><h3 class="text-3xl font-bold">Lookie</h3><p>[WIP] </p>
+    <h2 class="text-3xl font-bold">SHOWCASE 💪  </h2>
+        <div class="grid grid-cols-4 gap-4 mt-4 justify-items-center">
+        <script>
+          fetch('images/showcase/')
+            .then(response => response.text())
+            .then(text => {
+              const parser = new DOMParser();
+              const doc = parser.parseFromString(text, 'text/html');
+              const links = Array.from(doc.querySelectorAll('a'))
+          .filter(a => a.href.match(/\.(jpg|jpeg|png|webp)$/i))
+          .map(a => a.href);
+          
+              const showcase = document.querySelector('#showcase .grid');
+              links.forEach(link => {
+          const img = document.createElement('img');
+          img.src = link;
+          img.alt = 'Showcase image';
+          img.className = 'h-60 w-full object-cover cursor-pointer';
+          img.onclick = () => showFullImage(img.src);
+          showcase.appendChild(img);
+              });
+            })
+            .catch(console.error);
+        </script>
+        </div>
+
+        <div id="fullImageModal" class="fixed inset-0 bg-black bg-opacity-75 hidden flex items-center justify-center z-50" onclick="this.classList.add('hidden')">
+          <img id="fullImage" src="" alt="Full size image" class="max-h-[90vh] max-w-[90vw] object-contain">
+        </div>
+
+        <script>s
+        function showFullImage(src) {
+          document.getElementById('fullImage').src = src;
+          document.getElementById('fullImageModal').classList.remove('hidden');
+        }
+        </script>
+      </div>
+  </div>
+  <footer class="bg-[#322520] text-white p-8 mt-8">
+    <div class="container mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          <h3 class="text-xl mb-2">UP College of Fine Arts FabLab</h3>
+          <p>E. Jacinto Street, UP Diliman</p>
+          <p>Quezon City, Philippines 1101</p>
+        </div>
+        <div class="text-right">
+          <p class="mb-2">Email: cfafablab.upd@up.edu.ph</p>
+          <p class="mt-4">&copy; 2025 UP CFA FabLab</p>
+        </div>
       </div>
     </div>
-  </div>
+  </footer>
 
   <!-- Back to Top Button -->
   <div onclick="scrollToTop()" 
